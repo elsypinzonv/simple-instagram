@@ -4,13 +4,15 @@ public class DispatchContract {
 
     interface DispatchView {
 
-        void sendHome();
+        void onError(String error);
+
+        void sendToHome();
 
     }
 
     interface UserActionsListener {
 
-        void doDispatch();
+        void begin();
 
     }
 }

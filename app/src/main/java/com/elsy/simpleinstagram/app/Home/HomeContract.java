@@ -3,15 +3,20 @@ package com.elsy.simpleinstagram.app.Home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.elsy.simpleinstagram.domain.Post;
+
+import java.util.List;
+
 public class HomeContract {
 
     interface HomeView {
 
         void sendToNewPost(Bundle extras);
 
-        void sendToPostDetail();
 
         void showFailedLoadMessage(String error);
+
+        void refreshRecyclerView(List<Post> list);
 
     }
 
@@ -22,6 +27,8 @@ public class HomeContract {
         void shareNewPost();
 
         void takePicture();
+
+        void begin();
 
     }
 }

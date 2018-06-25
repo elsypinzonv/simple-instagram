@@ -30,7 +30,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements ListCallback<Post>, PostItemListener, HomeContract.HomeView {
+public class HomeActivity extends AppCompatActivity implements PostItemListener, HomeContract.HomeView {
 
     private RecyclerView postRecyclerView;
     private FloatingActionButton addButton;
@@ -45,29 +45,9 @@ public class HomeActivity extends AppCompatActivity implements ListCallback<Post
         initRecyclerView();
         setUpPresenter();
         initButton();
-        extra();
+        presenter.begin();
     }
 
-    public void extra(){
-        PostsInteractor interector = new PostsInteractor( ServiceGenerator.createService(PostsService.class));
-        interector.getPosts(this);
-    }
-
-    @Override
-    public void onItemsLoaded(List<Post> list) {
-        postAdapter.replaceData(list);
-
-    }
-
-    @Override
-    public void onNetworkError(String networkErrorMessage) {
-        Snackbar.make(postRecyclerView, networkErrorMessage, Snackbar.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onServerError(String serversErrorMessage) {
-        Snackbar.make(postRecyclerView, serversErrorMessage, Snackbar.LENGTH_LONG).show();
-    }
 
     @Override
     public void onPostClick(Post clickedPost, View view) {
@@ -94,7 +74,8 @@ public class HomeActivity extends AppCompatActivity implements ListCallback<Post
     private void setUpPresenter(){
         presenter = new HomePresenter(
                 this,
-                Injection.provideCameraHelper(this)
+                Injection.provideCameraHelper(this),
+                Injection.providePostsRepository(this)
         );
     }
 
@@ -124,17 +105,18 @@ public class HomeActivity extends AppCompatActivity implements ListCallback<Post
 
     @Override
     public void sendToNewPost(Bundle extras) {
-        ActivityHelper.begin(this,NewPostActivity.class, extras);
+        ActivityHelper.begin(this, NewPostActivity.class, extras);
     }
 
-    @Override
-    public void sendToPostDetail() {
-
-    }
 
     @Override
     public void showFailedLoadMessage(String error) {
         Snackbar.make(postRecyclerView, error, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void refreshRecyclerView(List<Post> list) {
+        postAdapter.replaceData(list);
     }
 
 }

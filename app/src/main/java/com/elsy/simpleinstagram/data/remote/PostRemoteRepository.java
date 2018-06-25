@@ -14,7 +14,7 @@ public class PostRemoteRepository implements Repository<Post> {
     public PostRemoteRepository(
             PostsInteractor interactor
     ){
-        interactor = checkNotNull(interactor);
+        this.interactor = checkNotNull(interactor);
     }
 
     /**

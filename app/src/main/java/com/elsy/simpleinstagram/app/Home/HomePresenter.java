@@ -6,24 +6,30 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
+import com.elsy.simpleinstagram.data.common.Repository;
+import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
+import com.elsy.simpleinstagram.domain.Post;
 import com.elsy.simpleinstagram.utils.camera.CameraHelper;
 import com.elsy.simpleinstagram.utils.camera.PermissionsHelper;
 
 import java.io.IOException;
+import java.util.List;
 
-public class HomePresenter implements HomeContract.UserActionsListener {
+public class HomePresenter implements HomeContract.UserActionsListener, ListCallback<Post> {
 
     private Activity activity;
     private HomeContract.HomeView view;
     private CameraHelper camera;
+    private Repository<Post> postRepository;
 
     private String ERROR_ADD_NEW_POST = "This permission is required to share a new post";
     private String ERROR_NOT_CAMERAA = "This device don't have a camera";
 
-    public HomePresenter(HomeContract.HomeView view, CameraHelper camera) {
+    public HomePresenter(HomeContract.HomeView view, CameraHelper camera, Repository<Post> postRepository) {
         this.view = view;
         this.activity = ((AppCompatActivity) view);
         this.camera = camera;
+        this.postRepository = postRepository;
     }
 
     @Override
@@ -59,4 +65,25 @@ public class HomePresenter implements HomeContract.UserActionsListener {
             view.showFailedLoadMessage(ERROR_NOT_CAMERAA);
         }
     }
+
+    @Override
+    public void begin() {
+        postRepository.getAll(this);
+    }
+
+    @Override
+    public void onItemsLoaded(List<Post> posts) {
+        view.refreshRecyclerView(posts);
+    }
+
+    @Override
+    public void onNetworkError(String networkErrorMessage) {
+        view.showFailedLoadMessage(networkErrorMessage);
+    }
+
+    @Override
+    public void onServerError(String serverErrorMessage) {
+        view.showFailedLoadMessage(serverErrorMessage);
+    }
+
 }

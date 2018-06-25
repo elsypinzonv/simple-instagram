@@ -28,11 +28,6 @@ public class PostsRepository implements Repository<Post> {
      */
     Map<String, Post> mCache;
 
-    /**
-     * Marks the cache as invalid, to force an update the next time data is requested. This variable
-     * has package local visibility so it can be accessed from tests.
-     */
-    boolean mCacheIsDirty = false;
 
     private PostsRepository(
             @NonNull PostRemoteRepository remoteDataSource,
@@ -78,42 +73,31 @@ public class PostsRepository implements Repository<Post> {
         checkNotNull(callback);
 
         // Respond immediately with cache if available and not dirty
-        if (mCache != null && !mCacheIsDirty) {
+        if (mCache != null) {
             callback.onItemsLoaded(new ArrayList<>(mCache.values()));
             return;
         }
 
-        if (mCacheIsDirty) {
-            // If the cache is dirty we need to fetch new data from the network.
-            getFromRemoteDataSource(callback);
-        } else {
-            // Query the local storage if available. If not, query the network.
-            mLocalDataSource.getAll(new ListCallback<Post>() {
-                @Override
-                public void onItemsLoaded(List<Post> list) {
-                    refreshCache(list);
-                    callback.onItemsLoaded(new ArrayList<>(mCache.values()));
-                }
+        mLocalDataSource.getAll(new ListCallback<Post>() {
+            @Override
+            public void onItemsLoaded(List<Post> list) {
+                addToCache(list);
+                callback.onItemsLoaded(new ArrayList<>(mCache.values()));
+                getFromRemoteDataSource(callback);
+            }
 
-                @Override
-                public void onNetworkError(String networkErrorMessage) {
-                    //Do nothing
-                }
+            @Override
+            public void onNetworkError(String networkErrorMessage) {
+                getFromRemoteDataSource(callback);
+            }
 
-                @Override
-                public void onServerError(String serverErrorMessage) {
-                    getFromRemoteDataSource(callback);
-                }
+            @Override
+            public void onServerError(String serverErrorMessage) {
+                getFromRemoteDataSource(callback);
+            }
 
-            });
-        }
-    }
+        });
 
-    /**
-     * Sets the cached state to dirty in order to directly call server on any request.
-     */
-    public void refresh() {
-        mCacheIsDirty = true;
     }
 
     public void add(Post post, RealmCallback callback) {
@@ -136,7 +120,7 @@ public class PostsRepository implements Repository<Post> {
         mRemoteDataSource.getAll(new ListCallback<Post>() {
             @Override
             public void onItemsLoaded(List<Post> list) {
-                refreshCache(list);
+                addToCache(list);
                 callback.onItemsLoaded(new ArrayList<>(mCache.values()));
             }
 
@@ -165,14 +149,16 @@ public class PostsRepository implements Repository<Post> {
         for (Post post : posts) {
             mCache.put(post.getId(), post);
         }
-        mCacheIsDirty = false;
     }
 
     /**
      * Adds cache content.
      * @param posts list of new objects.
      */
-    private void addToLocalDataSource(List<Post> posts) {
+    private void addToCache(List<Post> posts) {
+        if (mCache == null) {
+            mCache = new LinkedHashMap<>();
+        }
         for (Post post : posts) {
             mCache.put(post.getId(), post);
         }
