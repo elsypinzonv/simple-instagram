@@ -9,8 +9,6 @@ import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
  */
 public interface Repository<T> {
 
-    void add(T item);
-
     void getAll(ListCallback<T> callback);
 
 }

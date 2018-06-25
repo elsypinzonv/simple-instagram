@@ -2,6 +2,9 @@ package com.elsy.simpleinstagram.data.common;
 
 import android.support.annotation.NonNull;
 
+import com.elsy.simpleinstagram.data.local.PostLocalRepository;
+import com.elsy.simpleinstagram.data.local.realm.RealmCallback;
+import com.elsy.simpleinstagram.data.remote.PostRemoteRepository;
 import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
 import com.elsy.simpleinstagram.domain.Post;
 
@@ -16,14 +19,14 @@ public class PostsRepository implements Repository<Post> {
 
     private static PostsRepository INSTANCE = null;
 
-    private final Repository<Post> mRemoteDataSource;
+    private final PostRemoteRepository mRemoteDataSource;
 
-    private final Repository<Post> mLocalDataSource;
+    private final PostLocalRepository mLocalDataSource;
 
     /**
      * This variable has package local visibility so it can be accessed from tests.
      */
-    Map<Integer, Post> mCache;
+    Map<String, Post> mCache;
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable
@@ -32,8 +35,8 @@ public class PostsRepository implements Repository<Post> {
     boolean mCacheIsDirty = false;
 
     private PostsRepository(
-            @NonNull Repository<Post> remoteDataSource,
-            @NonNull Repository<Post> localDataSource) {
+            @NonNull PostRemoteRepository remoteDataSource,
+            @NonNull PostLocalRepository localDataSource) {
         this.mRemoteDataSource = checkNotNull(remoteDataSource);
         this.mLocalDataSource = checkNotNull(localDataSource);
     }
@@ -45,8 +48,8 @@ public class PostsRepository implements Repository<Post> {
      * @param localDataSource  the device storage data source
      * @return the {@link Repository} instance
      */
-    public static PostsRepository getInstance(Repository<Post> remoteDataSource,
-                                             Repository<Post> localDataSource){
+    public static PostsRepository getInstance(PostRemoteRepository remoteDataSource,
+                                              PostLocalRepository localDataSource){
         if (INSTANCE == null) {
             INSTANCE = new PostsRepository(remoteDataSource, localDataSource);
         }
@@ -54,7 +57,7 @@ public class PostsRepository implements Repository<Post> {
     }
 
     /**
-     * Used to force {@link #getInstance(Repository, Repository)} to create a new instance
+     * Used to force {@link #getInstance(PostRemoteRepository, PostLocalRepository)} to create a new instance
      * next time it's called.
      */
     public static void destroyInstance() {
@@ -113,10 +116,9 @@ public class PostsRepository implements Repository<Post> {
         mCacheIsDirty = true;
     }
 
-    @Override
-    public void add(Post post) {
+    public void add(Post post, RealmCallback callback) {
         checkNotNull(post);
-        mLocalDataSource.add(post);
+        mLocalDataSource.add(post, callback);
 
         if (mCache == null) {
             mCache = new LinkedHashMap<>();

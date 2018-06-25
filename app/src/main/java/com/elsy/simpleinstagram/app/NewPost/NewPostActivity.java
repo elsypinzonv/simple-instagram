@@ -1,24 +1,20 @@
 package com.elsy.simpleinstagram.app.NewPost;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.R;
-import com.elsy.simpleinstagram.domain.Post;
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class NewPostActivity extends AppCompatActivity implements NewPostContract.NewPostView {
@@ -39,7 +35,6 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
         presenter.getPicture();
     }
 
-
     @Override
     public void showPicture(Bitmap bitmap) {
         picture.setImageBitmap(bitmap);
@@ -53,12 +48,28 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
     }
 
     @Override
+    public void sendToHome() {
+        finish();
+    }
+
+    @Override
     public void showFailedLoadMessage(String error) {
+        Snackbar.make(comnent, error, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showValidationErrors(String error) {
+        if(title.getText().toString().isEmpty()){
+            title.setError(error);
+        }
+        if(comnent.getText().toString().isEmpty()){
+            comnent.setError(error);
+        }
 
     }
 
     private void setUpPresenter() {
-        presenter = new NewPostPresenter(this);
+        presenter = new NewPostPresenter(this, Injection.providePostsRepository(this));
     }
 
     @Override
@@ -72,7 +83,7 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
         int id = item.getItemId();
 
         if (id == R.id.action_save) {
-            presenter.savePost();
+            presenter.savePost(title.getText().toString(), comnent.getText().toString());
             return true;
         }
 
@@ -89,7 +100,6 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
             }
         });
     }
-
 
     private void bindViews(){
         toolbar = findViewById(R.id.toolbar);

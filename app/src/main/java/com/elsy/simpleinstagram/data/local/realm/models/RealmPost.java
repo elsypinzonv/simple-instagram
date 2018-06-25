@@ -1,22 +1,24 @@
 package com.elsy.simpleinstagram.data.local.realm.models;
 
+import java.util.UUID;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class RealmPost extends RealmObject {
 
     @PrimaryKey
-    private int id;
+    private String id;
     private String title;
     private String publishedAt;
     private String photo;
     private String comment;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

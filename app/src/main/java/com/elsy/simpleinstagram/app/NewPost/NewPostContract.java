@@ -1,10 +1,6 @@
 package com.elsy.simpleinstagram.app.NewPost;
 
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Bundle;
-
-import com.elsy.simpleinstagram.domain.Post;
 
 import java.io.File;
 
@@ -17,15 +13,18 @@ public interface NewPostContract {
 
         void showPicture(File file);
 
+        void sendToHome();
+
         void showFailedLoadMessage(String error);
 
+        void showValidationErrors(String error);
     }
 
     interface UserActionsListener {
 
         void getPicture();
 
-        void savePost();
+        void savePost(String title, String comment);
 
     }
 }

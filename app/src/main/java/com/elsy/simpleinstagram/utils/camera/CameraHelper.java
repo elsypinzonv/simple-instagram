@@ -31,7 +31,6 @@ public class CameraHelper {
             cameraIntent.putExtra( MediaStore.EXTRA_FINISH_ON_COMPLETION, true);
 
             if (cameraIntent.resolveActivity(activity.getPackageManager()) != null) {
-                // activity.startActivityForResult(cameraIntent, REQUEST_PICTURE_CAPTURE);
                 File pictureFile = getPictureFile();
                 if (pictureFile != null) {
                     cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getUri(pictureFile));

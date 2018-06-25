@@ -1,5 +1,6 @@
 package com.elsy.simpleinstagram.data.local;
 
+import com.elsy.simpleinstagram.data.local.realm.RealmCallback;
 import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
 import com.elsy.simpleinstagram.data.local.realm.RealmRepository;
 import com.elsy.simpleinstagram.data.local.realm.mappers.Mapper;
@@ -36,16 +37,14 @@ public class PostLocalRepository extends RealmRepository<RealmPost, Post> {
      * Save a object into local database. Executes individual transaction on Realm database.
      * @param post object to persist locally.
      */
-    @Override
-    public void add(final Post post) {
+    public void add(final Post post, final RealmCallback realmCallback) {
         final Realm realm = Realm.getInstance(realmConfiguration);
 
         realm.executeTransactionAsync(
                 new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        final RealmPost realmPost = realm.createObject(RealmPost.class);
-                        realmPost.setId(post.getId());
+                        final RealmPost realmPost = realm.createObject(RealmPost.class, post.getId());
                         realmPost.setComment(post.getComment());
                         realmPost.setPhoto(post.getPhoto());
                         realmPost.setPublishedAt(post.getPublishedAt());
@@ -55,13 +54,13 @@ public class PostLocalRepository extends RealmRepository<RealmPost, Post> {
                 new Realm.Transaction.OnSuccess() {
                     @Override
                     public void onSuccess() {
-                        // Transaction was a success.
+                        realmCallback.onSuccessRealmAction();
                     }
                 },
                 new Realm.Transaction.OnError() {
                     @Override
                     public void onError(Throwable error) {
-                        // Transaction failed and was automatically canceled.
+                        realmCallback.onErrorRealmAction(error.getMessage());
                     }
                 }
         );

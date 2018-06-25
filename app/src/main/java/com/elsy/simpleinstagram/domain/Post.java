@@ -15,7 +15,7 @@ public class Post {
     private String photo;
 
     @SerializedName(APIConstants.Keys.ID)
-    private int id;
+    private String id;
 
     @SerializedName(APIConstants.Keys.COMMENT)
     private String comment;
@@ -44,11 +44,11 @@ public class Post {
         this.photo = photo;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

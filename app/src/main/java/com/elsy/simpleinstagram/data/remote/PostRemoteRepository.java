@@ -12,8 +12,7 @@ public class PostRemoteRepository implements Repository<Post> {
     private PostsInteractor interactor;
 
     public PostRemoteRepository(
-            PostsInteractor interactor,
-            String serverToken
+            PostsInteractor interactor
     ){
         interactor = checkNotNull(interactor);
     }
@@ -27,9 +26,5 @@ public class PostRemoteRepository implements Repository<Post> {
         interactor.getPosts(callback);
     }
 
-    @Override
-    public void add(Post item) {
-        // Not support
-    }
 
 }
