@@ -1,5 +1,6 @@
 package com.elsy.simpleinstagram.app.PostDetail;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,8 @@ import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.R;
 import com.elsy.simpleinstagram.domain.Post;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 public class PostDetailActivity extends AppCompatActivity implements PostDetailContract.PostDetailView {
 
@@ -50,8 +53,22 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
         idText.setText(String.valueOf(post.getId()));
         createdAtText.setText(post.getPublishedAt());
         commentText.setText(post.getComment());
+        presenter.loadImage(post.getPhoto());
+    }
+
+    @Override
+    public void setPicture(File imageFile){
         Picasso.get()
-                .load(post.getPhoto())
+                .load(imageFile)
+                .resize(1000, 1000)
+                .centerCrop()
+                .into(postImage);
+    }
+
+    @Override
+    public void setPicture(String url){
+        Picasso.get()
+                .load(url)
                 .into(postImage);
     }
 

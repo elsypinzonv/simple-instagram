@@ -36,14 +36,10 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
     }
 
     @Override
-    public void showPicture(Bitmap bitmap) {
-        picture.setImageBitmap(bitmap);
-    }
-
-    @Override
     public void showPicture(File file) {
         Picasso.get()
                 .load(file)
+                .resize(1000, 1000)
                 .into(picture);
     }
 

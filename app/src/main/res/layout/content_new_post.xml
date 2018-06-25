@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".app.NewPost.NewPostActivity"
     tools:showIn="@layout/activity_new_post">
@@ -45,8 +46,8 @@
 
         <ImageView
             android:id="@+id/post_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:layout_margin="5dp"
             android:maxHeight="250dp"
             android:fitsSystemWindows="true"

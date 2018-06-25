@@ -1,10 +1,14 @@
 package com.elsy.simpleinstagram.app.PostDetail;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 
 import com.elsy.simpleinstagram.domain.Post;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
 
@@ -34,6 +38,19 @@ public class PostDetailPresenter implements PostDetailContract.UserActionsListen
             view.showPost(post);
         } catch (NullPointerException e) {
             view.showFailedLoadMessage(ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void loadImage(String image) {
+        if(image != null){
+            Uri imageUri = Uri.parse(image);
+            File imgFile = new File(imageUri.getPath());
+            if(imgFile.exists()) {
+                view.setPicture(imgFile);
+            } else{
+                view.setPicture(image);
+            }
         }
     }
 

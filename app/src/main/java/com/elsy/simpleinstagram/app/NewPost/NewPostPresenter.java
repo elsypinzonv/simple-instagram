@@ -1,8 +1,6 @@
 package com.elsy.simpleinstagram.app.NewPost;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 
@@ -38,21 +36,11 @@ public class NewPostPresenter implements NewPostContract.UserActionsListener, Re
             Uri imageUri = Uri.parse(path);
             File imgFile = new File(imageUri.getPath());
             if(imgFile.exists()) {
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inJustDecodeBounds = true;
-                BitmapFactory.decodeFile(imgFile.getAbsolutePath(), options);
-                int imageHeight = options.outHeight;
-                int imageWidth = options.outWidth;
-                if (imageHeight > 4096 || imageWidth > 4096) {
-                    BitmapFactory.Options opts = new BitmapFactory.Options();
-                    opts.inSampleSize = 4;
-                    Bitmap bitmap = BitmapFactory.decodeFile(imageUri.toString(), opts);
-                    view.showPicture(bitmap);
-                } else {
-                    view.showPicture(imgFile);
-                }
-            } else view.showFailedLoadMessage("Error getting the picture");
+                view.showPicture(imgFile);
+                return;
+            }
         }
+        view.showFailedLoadMessage("Error getting the picture");
     }
 
     @Override

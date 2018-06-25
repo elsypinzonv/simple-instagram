@@ -9,8 +9,6 @@ public interface NewPostContract {
 
     interface NewPostView {
 
-        void showPicture(Bitmap bitmap);
-
         void showPicture(File file);
 
         void sendToHome();
