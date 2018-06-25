@@ -39,7 +39,8 @@
         </activity>
         <activity
             android:name=".app.Home.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".app.PostDetail.PostDetailActivity"
             android:label="@string/title_activity_post_detail"

@@ -34,23 +34,25 @@ public class NewPostPresenter implements NewPostContract.UserActionsListener, Re
     public void getPicture() {
         String path =  activity.getIntent().getStringExtra("filepath");
         this.filePath = path;
-        Uri imageUri = Uri.parse(path);
-        File imgFile = new File(imageUri.getPath());
-        if(imgFile.exists()) {
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            BitmapFactory.decodeFile(imgFile.getAbsolutePath(), options);
-            int imageHeight = options.outHeight;
-            int imageWidth = options.outWidth;
-            if (imageHeight > 4096 || imageWidth > 4096) {
-                BitmapFactory.Options opts = new BitmapFactory.Options();
-                opts.inSampleSize = 4;
-                Bitmap bitmap = BitmapFactory.decodeFile(imageUri.toString(), opts);
-                view.showPicture(bitmap);
-            } else {
-                view.showPicture(imgFile);
-            }
-        } else view.showFailedLoadMessage("Error getting the picture");
+        if(path != null){
+            Uri imageUri = Uri.parse(path);
+            File imgFile = new File(imageUri.getPath());
+            if(imgFile.exists()) {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(imgFile.getAbsolutePath(), options);
+                int imageHeight = options.outHeight;
+                int imageWidth = options.outWidth;
+                if (imageHeight > 4096 || imageWidth > 4096) {
+                    BitmapFactory.Options opts = new BitmapFactory.Options();
+                    opts.inSampleSize = 4;
+                    Bitmap bitmap = BitmapFactory.decodeFile(imageUri.toString(), opts);
+                    view.showPicture(bitmap);
+                } else {
+                    view.showPicture(imgFile);
+                }
+            } else view.showFailedLoadMessage("Error getting the picture");
+        }
     }
 
     @Override
