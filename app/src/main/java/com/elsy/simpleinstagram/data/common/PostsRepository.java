@@ -11,7 +11,6 @@ import com.elsy.simpleinstagram.domain.Post;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
 
@@ -19,21 +18,21 @@ public class PostsRepository implements Repository<Post> {
 
     private static PostsRepository INSTANCE = null;
 
-    private final PostRemoteRepository mRemoteDataSource;
+    private final PostRemoteRepository remoteDataSource;
 
-    private final PostLocalRepository mLocalDataSource;
+    private final PostLocalRepository localDataSource;
 
     /**
      * This variable has package local visibility so it can be accessed from tests.
      */
-    Map<String, Post> mCache;
+    ArrayList<Post> cache;
 
 
     private PostsRepository(
             @NonNull PostRemoteRepository remoteDataSource,
             @NonNull PostLocalRepository localDataSource) {
-        this.mRemoteDataSource = checkNotNull(remoteDataSource);
-        this.mLocalDataSource = checkNotNull(localDataSource);
+        this.remoteDataSource = checkNotNull(remoteDataSource);
+        this.localDataSource = checkNotNull(localDataSource);
     }
 
     /**
@@ -73,16 +72,16 @@ public class PostsRepository implements Repository<Post> {
         checkNotNull(callback);
 
         // Respond immediately with cache if available and not dirty
-        if (mCache != null) {
-            callback.onItemsLoaded(new ArrayList<>(mCache.values()));
+        if (cache != null) {
+            callback.onItemsLoaded(cache);
             return;
         }
 
-        mLocalDataSource.getAll(new ListCallback<Post>() {
+        localDataSource.getAll(new ListCallback<Post>() {
             @Override
             public void onItemsLoaded(List<Post> list) {
                 addToCache(list);
-                callback.onItemsLoaded(new ArrayList<>(mCache.values()));
+                callback.onItemsLoaded(cache);
                 getFromRemoteDataSource(callback);
             }
 
@@ -102,12 +101,11 @@ public class PostsRepository implements Repository<Post> {
 
     public void add(Post post, RealmCallback callback) {
         checkNotNull(post);
-        mLocalDataSource.add(post, callback);
-
-        if (mCache == null) {
-            mCache = new LinkedHashMap<>();
+        localDataSource.add(post, callback);
+        if (cache == null) {
+            cache = new ArrayList<>();
         }
-        mCache.put(post.getId(), post);
+        cache.add(0,post);
     }
 
 
@@ -117,11 +115,11 @@ public class PostsRepository implements Repository<Post> {
      * @param callback delegate observer of request.
      */
     private void getFromRemoteDataSource(final ListCallback<Post> callback) {
-        mRemoteDataSource.getAll(new ListCallback<Post>() {
+        remoteDataSource.getAll(new ListCallback<Post>() {
             @Override
             public void onItemsLoaded(List<Post> list) {
                 addToCache(list);
-                callback.onItemsLoaded(new ArrayList<>(mCache.values()));
+                callback.onItemsLoaded(cache);
             }
 
             @Override
@@ -138,29 +136,15 @@ public class PostsRepository implements Repository<Post> {
     }
 
     /**
-     * Updates cache content.
-     * @param posts updated list of objects.
-     */
-    private void refreshCache(List<Post> posts) {
-        if (mCache == null) {
-            mCache = new LinkedHashMap<>();
-        }
-        mCache.clear();
-        for (Post post : posts) {
-            mCache.put(post.getId(), post);
-        }
-    }
-
-    /**
      * Adds cache content.
      * @param posts list of new objects.
      */
     private void addToCache(List<Post> posts) {
-        if (mCache == null) {
-            mCache = new LinkedHashMap<>();
+        if (cache == null) {
+            cache = new ArrayList<>();
         }
         for (Post post : posts) {
-            mCache.put(post.getId(), post);
+            cache.add(post);
         }
     }
 

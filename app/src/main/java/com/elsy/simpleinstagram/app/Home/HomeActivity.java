@@ -45,9 +45,13 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
         initRecyclerView();
         setUpPresenter();
         initButton();
-        presenter.begin();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.begin();
+    }
 
     @Override
     public void onPostClick(Post clickedPost, View view) {
