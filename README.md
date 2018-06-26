@@ -5,7 +5,7 @@ This is an interview project. The Android app should be like the Instagram appli
 simpler. 
 
 ## <a name="Functionalities">Functionalities</a>
-- Get the objects(Post) from a json document in the endpoint:  https://photomaton.herokuapp.com/api/photo
+- Gets the objects(Post) from a JSON document in the endpoint:  https://photomaton.herokuapp.com/api/photo
 ``` Gson
 [
     {
@@ -19,16 +19,16 @@ simpler.
     
 ```
 - Displays the Posts pictures in the Home.
-- Show the Post detail When the user taps into a photo. (landscape, portrait)
-- Create a Post
-    - Open the camera and take a picture
-    - Add the information (title, comment)
-    - Save the information in the Realm database.
-    - Display it in the home list
+- Shows the Post detail When the user taps into a photo. (landscape, portrait)
+- Creates a Post
+    - Opens the camera and take a picture
+    - Adds the information (title, comment)
+    - Saves the information in the Realm database.
+    - Displays it on the home list
 
 NOTE:
-Using Picasso the images for the same URL are only download one time while the cache is not Full. 
-For this reason, The images are the same for each object with the URL "https://unsplash.it/600/300/?random".
+It uses the Picasso library to get the Images from the URL in the Post object. Picasso downloads the images from the URL and saves them in its cache. Picasso gets the image from the URL again when the picture is not cached anymore.
+Since all the objects are using the same URL (https://unsplash.it/600/300/?random), the list of pictures shows the same image.
 
 ## <a name="Libraries">Libraries</a>
 
