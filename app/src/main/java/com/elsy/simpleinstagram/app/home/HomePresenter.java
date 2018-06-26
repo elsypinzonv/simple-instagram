@@ -44,15 +44,22 @@ public class HomePresenter implements HomeContract.UserActionsListener, ListCall
 
     @Override
     public void onRequestPermissionResult(int requestCode, @NonNull int[] grantResults) {
-        switch(requestCode) {
-            case PermissionsHelper.CAMERA_CODE:
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
-                    view.showFailedLoadMessage(ERROR_ADD_NEW_POST);
+        try {
+            switch (requestCode) {
+                case PermissionsHelper.CAMERA_CODE:
+                    if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                        view.showFailedLoadMessage(ERROR_ADD_NEW_POST);
+                    } else camera.execute();
+
                     break;
-            case PermissionsHelper.WRITE_EXTERNAL_STORAGE_CODE:
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
-                    view.showFailedLoadMessage(ERROR_ADD_NEW_POST);
+                case PermissionsHelper.WRITE_EXTERNAL_STORAGE_CODE:
+                    if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                        view.showFailedLoadMessage(ERROR_ADD_NEW_POST);
+                    } else camera.execute();
                     break;
+            }
+        } catch (IOException e) {
+            view.showFailedLoadMessage(e.getMessage());
         }
     }
 
