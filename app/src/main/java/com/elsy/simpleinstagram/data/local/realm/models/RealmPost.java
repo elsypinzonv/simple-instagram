@@ -1,7 +1,5 @@
 package com.elsy.simpleinstagram.data.local.realm.models;
 
-import java.util.UUID;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
