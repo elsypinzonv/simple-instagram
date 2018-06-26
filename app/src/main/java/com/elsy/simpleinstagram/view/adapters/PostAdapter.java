@@ -67,7 +67,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
             if(imgFile.exists()) {
                 Picasso.get()
                         .load(imgFile)
-                        .resize(1000, 0)
+                        .resize(400, 0)
                         .centerCrop()
                         .into(picture);
             } else{

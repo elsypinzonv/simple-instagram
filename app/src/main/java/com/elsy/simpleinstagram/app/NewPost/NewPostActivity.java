@@ -39,7 +39,7 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
     public void showPicture(File file) {
         Picasso.get()
                 .load(file)
-                .resize(1000, 0)
+                .resize(400, 0)
                 .into(picture);
     }
 

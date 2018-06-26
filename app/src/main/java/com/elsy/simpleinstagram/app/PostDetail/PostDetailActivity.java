@@ -60,7 +60,7 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
     public void setPicture(File imageFile){
         Picasso.get()
                 .load(imageFile)
-                .resize(1000, 0)
+                .resize(400, 0)
                 .centerCrop()
                 .into(postImage);
     }
