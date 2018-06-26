@@ -1,7 +1,7 @@
 package com.elsy.simpleinstagram.data.remote.service;
 
 import android.annotation.SuppressLint;
-import com.elsy.simpleinstagram.data.APIConstants;
+import com.elsy.simpleinstagram.data.remote.APIConstants;
 import com.elsy.simpleinstagram.utils.Validator;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;

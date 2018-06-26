@@ -1,6 +1,6 @@
 package com.elsy.simpleinstagram.domain;
 
-import com.elsy.simpleinstagram.data.APIConstants;
+import com.elsy.simpleinstagram.data.remote.APIConstants;
 import com.google.gson.annotations.SerializedName;
 
 public class Post {

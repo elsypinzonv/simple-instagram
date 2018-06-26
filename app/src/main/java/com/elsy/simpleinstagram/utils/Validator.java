@@ -1,6 +1,6 @@
 package com.elsy.simpleinstagram.utils;
 
-import com.elsy.simpleinstagram.data.APIConstants;
+import com.elsy.simpleinstagram.data.remote.APIConstants;
 
 public class Validator {
 

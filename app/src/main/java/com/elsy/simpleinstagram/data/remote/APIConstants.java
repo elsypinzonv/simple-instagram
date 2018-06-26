@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.data;
+package com.elsy.simpleinstagram.data.remote;
 
 public class APIConstants {
 
