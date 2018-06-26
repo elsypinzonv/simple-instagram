@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class CameraHelper {
 
@@ -18,6 +19,9 @@ public class CameraHelper {
     private Activity activity;
     private String pictureFilePath;
     public static final int REQUEST_PICTURE_CAPTURE = 1;
+    private static final String FILE_PROVIDER_PATH = ".fileprovider";
+    private static final String SUFFIX_IMAGE_FORMAT = ".jpg";
+    private static final String TIME_FORMAT = "yyyyMMddHHmmss";
 
     public CameraHelper(Activity activity) {
         this.activity = activity;
@@ -47,17 +51,17 @@ public class CameraHelper {
     private Uri getUri(File pictureFile){
         return FileProvider.getUriForFile(
                 activity,
-                getAutorities(),
+                getAuthorities(),
                 pictureFile
         );
     }
 
-    private String getAutorities(){
-        return activity.getApplicationContext().getPackageName() + ".fileprovider";
+    private String getAuthorities(){
+        return activity.getApplicationContext().getPackageName() + FILE_PROVIDER_PATH;
     }
 
     private File getPictureFile() throws IOException {
-        File image = File.createTempFile(getTimeStamp(),  ".jpg", getStorageDir());
+        File image = File.createTempFile(getTimeStamp(),  SUFFIX_IMAGE_FORMAT, getStorageDir());
         this.pictureFilePath = image.getAbsolutePath();
         return image;
     }
@@ -65,12 +69,12 @@ public class CameraHelper {
 
     private String getTimeStamp() {
         return new SimpleDateFormat(
-                "yyyyMMddHHmmss"
+                TIME_FORMAT,
+                Locale.getDefault()
         ).format(new Date());
     }
 
     private File getStorageDir() {
         return activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
     }
-
 }

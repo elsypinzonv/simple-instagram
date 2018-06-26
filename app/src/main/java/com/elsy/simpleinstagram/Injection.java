@@ -52,5 +52,4 @@ public class Injection {
     private static PostsService providePostService(){
         return ServiceGenerator.createService(PostsService.class);
     }
-
 }
