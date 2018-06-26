@@ -25,3 +25,23 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+ext {
+
+    supportLibrary = '27.1.1'
+    supportConstraintLibrary = '1.1.2'
+
+    //Third party libs.
+    okhttp = '3.10.0'
+    retrofit = '2.4.0'
+    converterGson = '2.4.0'
+    picasso = '2.71828'
+    gson = '2.8.5'
+
+    //Test libs
+    junit = '4.12'
+    supportTestRunner = '1.0.2'
+    supportTestEspresso = '3.0.2'
+
+}
