@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.R;
 import com.elsy.simpleinstagram.domain.Post;
-import com.squareup.picasso.Picasso;
+import com.elsy.simpleinstagram.utils.ActivityHelper;
 
 import java.io.File;
 
@@ -57,18 +57,12 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
 
     @Override
     public void setPicture(File imageFile){
-        Picasso.get()
-                .load(imageFile)
-                .resize(400, 0)
-                .centerCrop()
-                .into(postImage);
+        ActivityHelper.setImageWithPicasso(imageFile,postImage);
     }
 
     @Override
     public void setPicture(String url){
-        Picasso.get()
-                .load(url)
-                .into(postImage);
+        ActivityHelper.setImageWithPicasso(url, postImage);
     }
 
     private void setUpPresenter(){
