@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.app.Home;
+package com.elsy.simpleinstagram.app.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

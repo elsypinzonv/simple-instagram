@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.app.PostDetail;
+package com.elsy.simpleinstagram.app.postDetail;
 
 import com.elsy.simpleinstagram.domain.Post;
 

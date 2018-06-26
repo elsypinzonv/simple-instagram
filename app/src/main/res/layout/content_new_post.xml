@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".app.NewPost.NewPostActivity"
+    tools:context=".app.newPost.NewPostActivity"
     tools:showIn="@layout/activity_new_post">
 
     <LinearLayout android:id="@+id/info"

@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.app.Dispatch;
+package com.elsy.simpleinstagram.app.dispatch;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.R;
-import com.elsy.simpleinstagram.app.Home.HomeActivity;
+import com.elsy.simpleinstagram.app.home.HomeActivity;
 import com.elsy.simpleinstagram.utils.ActivityHelper;
 
 

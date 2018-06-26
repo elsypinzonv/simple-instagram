@@ -1,6 +1,5 @@
-package com.elsy.simpleinstagram.app.NewPost;
+package com.elsy.simpleinstagram.app.newPost;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;

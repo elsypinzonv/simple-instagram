@@ -11,6 +11,7 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -27,7 +28,7 @@
         </provider>
 
         <activity
-            android:name=".app.Dispatch.DispatchActivity"
+            android:name=".app.dispatch.DispatchActivity"
             android:label="@string/title_activity_distpach"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Dispatch">
@@ -37,18 +38,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".app.Home.HomeActivity"
+            android:name=".app.home.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:icon="@mipmap/ic_launcher_round"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
+
         <activity
-            android:name=".app.PostDetail.PostDetailActivity"
+            android:name=".app.postDetail.PostDetailActivity"
             android:label="@string/title_activity_post_detail"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
-            android:name=".app.NewPost.NewPostActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".app.newPost.NewPostActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

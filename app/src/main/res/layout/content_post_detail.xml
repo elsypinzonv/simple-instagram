@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".app.PostDetail.PostDetailActivity"
+    tools:context=".app.postDetail.PostDetailActivity"
     tools:showIn="@layout/activity_post_detail">
 
     <LinearLayout android:id="@+id/info"

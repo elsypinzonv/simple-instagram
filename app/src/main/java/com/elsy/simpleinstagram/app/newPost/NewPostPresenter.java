@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.app.NewPost;
+package com.elsy.simpleinstagram.app.newPost;
 
 import android.app.Activity;
 import android.net.Uri;

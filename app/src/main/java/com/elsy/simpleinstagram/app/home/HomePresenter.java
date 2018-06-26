@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.app.Home;
+package com.elsy.simpleinstagram.app.home;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;

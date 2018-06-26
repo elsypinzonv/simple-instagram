@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.app.Home;
+package com.elsy.simpleinstagram.app.home;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,21 +10,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.elsy.simpleinstagram.Injection;
-import com.elsy.simpleinstagram.app.NewPost.NewPostActivity;
+import com.elsy.simpleinstagram.app.newPost.NewPostActivity;
 import com.elsy.simpleinstagram.utils.camera.CameraHelper;
 import com.elsy.simpleinstagram.utils.ActivityHelper;
 import com.elsy.simpleinstagram.view.adapters.PostAdapter;
 import com.elsy.simpleinstagram.view.listeners.PostItemListener;
 import com.elsy.simpleinstagram.R;
-import com.elsy.simpleinstagram.app.PostDetail.PostDetailActivity;
-import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
-import com.elsy.simpleinstagram.data.PostsInteractor;
-import com.elsy.simpleinstagram.data.remote.service.PostsService;
-import com.elsy.simpleinstagram.data.remote.service.ServiceGenerator;
+import com.elsy.simpleinstagram.app.postDetail.PostDetailActivity;
 import com.elsy.simpleinstagram.domain.Post;
 import com.google.gson.Gson;
 

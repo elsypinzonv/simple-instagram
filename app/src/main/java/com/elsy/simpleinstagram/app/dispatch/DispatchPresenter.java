@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.app.Dispatch;
+package com.elsy.simpleinstagram.app.dispatch;
 
 import com.elsy.simpleinstagram.data.common.Repository;
 import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;

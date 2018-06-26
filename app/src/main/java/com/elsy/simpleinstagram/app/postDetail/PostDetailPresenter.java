@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.app.PostDetail;
+package com.elsy.simpleinstagram.app.postDetail;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.elsy.simpleinstagram.domain.Post;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
