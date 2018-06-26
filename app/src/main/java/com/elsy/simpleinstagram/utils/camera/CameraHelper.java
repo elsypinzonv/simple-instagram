@@ -15,13 +15,12 @@ import java.util.Locale;
 
 public class CameraHelper {
 
-
-    private Activity activity;
-    private String pictureFilePath;
     public static final int REQUEST_PICTURE_CAPTURE = 1;
     private static final String FILE_PROVIDER_PATH = ".fileprovider";
     private static final String SUFFIX_IMAGE_FORMAT = ".jpg";
     private static final String TIME_FORMAT = "yyyyMMddHHmmss";
+    private Activity activity;
+    private String pictureFilePath;
 
     public CameraHelper(Activity activity) {
         this.activity = activity;
