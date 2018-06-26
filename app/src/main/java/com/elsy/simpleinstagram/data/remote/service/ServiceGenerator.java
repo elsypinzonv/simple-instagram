@@ -2,7 +2,8 @@ package com.elsy.simpleinstagram.data.remote.service;
 
 import android.annotation.SuppressLint;
 import com.elsy.simpleinstagram.data.remote.APIConstants;
-import com.elsy.simpleinstagram.utils.Validator;
+import com.elsy.simpleinstagram.utils.ActivityHelper;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
@@ -78,7 +79,7 @@ public class ServiceGenerator {
             httpClient.hostnameVerifier(new HostnameVerifier() {
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
-                    return Validator.isValidHostame(hostname);
+                    return ActivityHelper.isValidHostame(hostname);
                 }
             });
 

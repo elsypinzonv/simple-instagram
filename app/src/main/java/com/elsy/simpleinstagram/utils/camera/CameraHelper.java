@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+
+import com.elsy.simpleinstagram.utils.ActivityHelper;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -67,10 +70,7 @@ public class CameraHelper {
 
 
     private String getTimeStamp() {
-        return new SimpleDateFormat(
-                TIME_FORMAT,
-                Locale.getDefault()
-        ).format(new Date());
+        return ActivityHelper.getTimeString(TIME_FORMAT);
     }
 
     private File getStorageDir() {

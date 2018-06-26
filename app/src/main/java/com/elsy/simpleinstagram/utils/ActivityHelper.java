@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.widget.ImageView;
 
+import com.elsy.simpleinstagram.data.remote.APIConstants;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ActivityHelper {
 
@@ -56,5 +60,16 @@ public class ActivityHelper {
         Picasso.get()
                 .load(image)
                 .into(picture);
+    }
+
+    public static final boolean isValidHostame(String hostname){
+        return APIConstants.URL.contains(hostname);
+    }
+
+    public static String getTimeString(String format){
+        return new SimpleDateFormat(
+                format,
+                Locale.getDefault()
+        ).format(new Date());
     }
 }

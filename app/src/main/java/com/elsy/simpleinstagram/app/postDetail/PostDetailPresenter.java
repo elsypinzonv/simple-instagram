@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 
 import com.elsy.simpleinstagram.domain.Post;
+import com.elsy.simpleinstagram.utils.AppConstants;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -16,10 +17,10 @@ public class PostDetailPresenter implements PostDetailContract.UserActionsListen
     private Gson gson;
     private Activity activityContext;
     protected PostDetailContract.PostDetailView view;
-    private final String KEY_POST = "post";
-    private final String ERROR_MESSAGE = "Error getting the data";
 
-    public PostDetailPresenter (
+    private static final String ERROR_MESSAGE = "Error getting the data";
+
+    PostDetailPresenter (
             PostDetailContract.PostDetailView view,
             Gson gson
     ) {
@@ -30,7 +31,7 @@ public class PostDetailPresenter implements PostDetailContract.UserActionsListen
 
     @Override
     public void loadPost() {
-        String postStr = activityContext.getIntent().getStringExtra(KEY_POST);
+        String postStr = activityContext.getIntent().getStringExtra(AppConstants.KEY_POST);
         Post post = gson.fromJson(postStr, Post.class);
         try {
             checkNotNull(post);
