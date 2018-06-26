@@ -22,11 +22,9 @@ public class Injection {
         return new Gson();
     }
 
-
     public static CameraHelper provideCameraHelper(Activity activity) {
         return new CameraHelper(activity);
     }
-
 
     public static PostsRepository providePostsRepository(Context context) {
         Realm.init(context);
