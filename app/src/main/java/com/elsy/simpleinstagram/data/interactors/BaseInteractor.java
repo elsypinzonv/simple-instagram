@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.data;
+package com.elsy.simpleinstagram.data.interactors;
 
 import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
 

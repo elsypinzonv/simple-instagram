@@ -1,10 +1,8 @@
 package com.elsy.simpleinstagram.data.remote.service;
 
+import android.annotation.SuppressLint;
 import com.elsy.simpleinstagram.data.APIConstants;
-
-import java.io.IOException;
-import java.security.cert.CertificateException;
-
+import com.elsy.simpleinstagram.utils.Validator;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
@@ -12,10 +10,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -33,6 +28,7 @@ public class ServiceGenerator {
             new Retrofit.Builder()
                     .baseUrl(APIConstants.URL)
                     .addConverterFactory(GsonConverterFactory.create());
+    private static final String SECURE_SOCKETS_LAYER = "SSL";
 
     /**
      * Generates a simple out of the box retrofit service without a token.
@@ -41,33 +37,6 @@ public class ServiceGenerator {
      * @return out of the box retrofit service to be used to make requests.
      */
     public static <S> S createService(Class<S> serviceClass) {
-        return createService(serviceClass, null);
-    }
-
-    /**
-     *  Generates a out of the box retrofit service with a token on the headers.
-     *
-     * @param serviceClass service defined using the API reference.
-     * @param <S> type of service to call.
-     * @param authToken user token necessary to make certain requests.
-     * @return out of the box retrofit service to be used to make requests.
-     */
-    public static <S> S createService(Class<S> serviceClass, final String authToken) {
-        if (authToken != null) {
-            httpClient.addInterceptor(new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-                    Request original = chain.request();
-                    Request.Builder requestBuilder = original.newBuilder()
-                            .header("Authorization", authToken)
-                            .method(original.method(), original.body());
-
-                    Request request = requestBuilder.build();
-                    return chain.proceed(request);
-                }
-            });
-        }
-
         OkHttpClient client = getUnsafeOkHttpClient();
         Retrofit retrofit = builder.client(client).build();
         return retrofit.create(serviceClass);
@@ -81,36 +50,39 @@ public class ServiceGenerator {
     private static OkHttpClient getUnsafeOkHttpClient() {
         try {
 
-            final TrustManager[] trustAllCerts = new TrustManager[] {
-                    new X509TrustManager() {
-                        @Override
-                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-                        }
+            X509TrustManager x509TrustManager = new X509TrustManager() {
+                @SuppressLint("TrustAllX509TrustManager")
+                @Override
+                public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {
+                }
 
-                        @Override
-                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-                        }
+                @SuppressLint("TrustAllX509TrustManager")
+                @Override
+                public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) {
+                }
 
-                        @Override
-                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                            return new java.security.cert.X509Certificate[]{};
-                        }
-                    }
+                @Override
+                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                    return new java.security.cert.X509Certificate[]{};
+                }
             };
 
-            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            final TrustManager[] trustAllCerts = new TrustManager[] {
+                    x509TrustManager
+            };
+
+            final SSLContext sslContext = SSLContext.getInstance(SECURE_SOCKETS_LAYER);
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-            httpClient.sslSocketFactory(sslSocketFactory);
+            httpClient.sslSocketFactory(sslSocketFactory, x509TrustManager);
             httpClient.hostnameVerifier(new HostnameVerifier() {
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
-                    return true;
+                    return Validator.isValidHostame(hostname);
                 }
             });
 
-            OkHttpClient okHttpClient = httpClient.build();
-            return okHttpClient;
+            return httpClient.build();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

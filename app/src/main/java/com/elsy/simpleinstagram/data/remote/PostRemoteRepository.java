@@ -1,7 +1,7 @@
 package com.elsy.simpleinstagram.data.remote;
 
 import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
-import com.elsy.simpleinstagram.data.PostInteractor;
+import com.elsy.simpleinstagram.data.interactors.PostInteractor;
 import com.elsy.simpleinstagram.data.common.Repository;
 import com.elsy.simpleinstagram.domain.Post;
 
@@ -25,6 +25,5 @@ public class PostRemoteRepository implements Repository<Post> {
     public void getAll(ListCallback<Post> callback) {
         interactor.getPosts(callback);
     }
-
 
 }

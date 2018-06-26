@@ -3,7 +3,7 @@ package com.elsy.simpleinstagram;
 import android.app.Activity;
 import android.content.Context;
 
-import com.elsy.simpleinstagram.data.PostInteractor;
+import com.elsy.simpleinstagram.data.interactors.PostInteractor;
 import com.elsy.simpleinstagram.data.common.PostsRepository;
 import com.elsy.simpleinstagram.data.local.PostLocalRepository;
 import com.elsy.simpleinstagram.data.local.realm.mappers.RealmPostToPostMapper;
