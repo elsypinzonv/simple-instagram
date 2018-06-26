@@ -1,10 +1,10 @@
-package com.elsy.simpleinstagram.app.PostDetail;
+package com.elsy.simpleinstagram.app.postDetail;
 
 import com.elsy.simpleinstagram.domain.Post;
 
 import java.io.File;
 
-public interface PostDetailContract {
+interface PostDetailContract {
 
     interface PostDetailView {
 

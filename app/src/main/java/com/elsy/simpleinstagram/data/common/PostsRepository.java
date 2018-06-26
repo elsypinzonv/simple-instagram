@@ -9,7 +9,6 @@ import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
 import com.elsy.simpleinstagram.domain.Post;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
@@ -25,7 +24,7 @@ public class PostsRepository implements Repository<Post> {
     /**
      * This variable has package local visibility so it can be accessed from tests.
      */
-    ArrayList<Post> cache;
+    private ArrayList<Post> cache;
 
 
     private PostsRepository(
@@ -51,14 +50,6 @@ public class PostsRepository implements Repository<Post> {
     }
 
     /**
-     * Used to force {@link #getInstance(PostRemoteRepository, PostLocalRepository)} to create a new instance
-     * next time it's called.
-     */
-    public static void destroyInstance() {
-        INSTANCE = null;
-    }
-
-    /**
      * Gets posts from cache, local data source (Realm) or remote data source, whichever is
      * available first.
      * <p>
@@ -71,7 +62,7 @@ public class PostsRepository implements Repository<Post> {
     public void getAll(final ListCallback<Post> callback) {
         checkNotNull(callback);
 
-        // Respond immediately with cache if available and not dirty
+        // Respond immediately with cache if available
         if (cache != null) {
             callback.onItemsLoaded(cache);
             return;
@@ -143,9 +134,7 @@ public class PostsRepository implements Repository<Post> {
         if (cache == null) {
             cache = new ArrayList<>();
         }
-        for (Post post : posts) {
-            cache.add(post);
-        }
+        cache.addAll(posts);
     }
 
 }

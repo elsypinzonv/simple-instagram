@@ -10,7 +10,6 @@ public class PermissionsHelper {
     public static final int CAMERA_CODE = 100;
     public static final int WRITE_EXTERNAL_STORAGE_CODE = 200;
 
-
     public static boolean check(String permission, int code, Activity activity){
         if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
             requestPermission(permission, code, activity);

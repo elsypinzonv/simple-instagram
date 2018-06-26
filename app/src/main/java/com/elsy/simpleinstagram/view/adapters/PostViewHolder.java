@@ -9,12 +9,12 @@ import com.elsy.simpleinstagram.R;
 
 public class PostViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView postPicture;
-        TextView postTitle;
+        final ImageView postPicture;
+        final TextView postTitle;
 
-        public PostViewHolder(View view) {
+         PostViewHolder(View view) {
             super(view);
-            postPicture = (ImageView) view.findViewById(R.id.picture);
-            postTitle = (TextView) view.findViewById(R.id.title);
+            postPicture = view.findViewById(R.id.picture);
+            postTitle = view.findViewById(R.id.title);
         }
 }

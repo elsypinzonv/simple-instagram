@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.app.NewPost;
+package com.elsy.simpleinstagram.app.newPost;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -7,21 +7,24 @@ import android.support.v7.app.AppCompatActivity;
 import com.elsy.simpleinstagram.data.common.PostsRepository;
 import com.elsy.simpleinstagram.data.local.realm.RealmCallback;
 import com.elsy.simpleinstagram.domain.Post;
+import com.elsy.simpleinstagram.utils.ActivityHelper;
+import com.elsy.simpleinstagram.utils.AppConstants;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class NewPostPresenter implements NewPostContract.UserActionsListener, RealmCallback {
 
 
-    private Activity activity;
-    private NewPostContract.NewPostView view;
-    private PostsRepository repository;
-    private String ERROR_EMPTY= "This field is obligatory";
+    private final Activity activity;
+    private final NewPostContract.NewPostView view;
+    private final PostsRepository repository;
     private String filePath;
+    private static final String ERROR_EMPTY = "This field is obligatory";
+    private static final String ERROR_PICTURE_NOT_FOUND = "This field is obligatory";
+    private static final String ID_FORMAT = "yyyyMMddHHmmss";
+    private static final String PUBLISHED_AT_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
 
-    public NewPostPresenter(NewPostContract.NewPostView view, PostsRepository repository) {
+    NewPostPresenter(NewPostContract.NewPostView view, PostsRepository repository) {
         this.view = view;
         this.activity = ((AppCompatActivity) view);
         this.repository = repository;
@@ -30,43 +33,30 @@ public class NewPostPresenter implements NewPostContract.UserActionsListener, Re
 
     @Override
     public void getPicture() {
-        String path =  activity.getIntent().getStringExtra("filepath");
+        String path = activity.getIntent().getStringExtra(AppConstants.KEY_FILE_PATH);
         this.filePath = path;
-        if(path != null){
+        if (path != null) {
             Uri imageUri = Uri.parse(path);
             File imgFile = new File(imageUri.getPath());
-            if(imgFile.exists()) {
+            if (imgFile.exists()) {
                 view.showPicture(imgFile);
                 return;
             }
         }
-        view.showFailedLoadMessage("Error getting the picture");
+        view.showFailedLoadMessage(ERROR_PICTURE_NOT_FOUND);
     }
 
     @Override
     public void savePost(String title, String comment) {
-        if(!title.isEmpty() && !comment.isEmpty()){
+        if (!title.isEmpty() && !comment.isEmpty()) {
             Post post = new Post();
             post.setId(getID());
             post.setPhoto(filePath);
             post.setTitle(title);
             post.setComment(comment);
-            post.setPublishedAt(getpublishedAt());
+            post.setPublishedAt(getPublishedAt());
             repository.add(post, this);
-        }else view.showValidationErrors(ERROR_EMPTY);
-    }
-
-    private String getID() {
-        return new SimpleDateFormat(
-                "yyyyMMddHHmmss"
-        ).format(new Date());
-
-    }
-
-    private String getpublishedAt() {
-        return new SimpleDateFormat(
-                "yyyy-MM-dd'T'HH:mm:ssZ"
-        ).format(new Date());
+        } else view.showValidationErrors(ERROR_EMPTY);
     }
 
     @Override
@@ -78,4 +68,13 @@ public class NewPostPresenter implements NewPostContract.UserActionsListener, Re
     public void onErrorRealmAction(String serverErrorMessage) {
         view.showFailedLoadMessage(serverErrorMessage);
     }
+
+    private String getID() {
+        return ActivityHelper.getTimeString(ID_FORMAT);
+    }
+
+    private String getPublishedAt() {
+        return ActivityHelper.getTimeString(PUBLISHED_AT_FORMAT);
+    }
+
 }

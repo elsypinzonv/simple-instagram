@@ -1,6 +1,5 @@
-package com.elsy.simpleinstagram.app.PostDetail;
+package com.elsy.simpleinstagram.app.postDetail;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
@@ -13,9 +12,11 @@ import android.widget.TextView;
 import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.R;
 import com.elsy.simpleinstagram.domain.Post;
-import com.squareup.picasso.Picasso;
+import com.elsy.simpleinstagram.utils.ActivityHelper;
 
 import java.io.File;
+
+import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
 
 public class PostDetailActivity extends AppCompatActivity implements PostDetailContract.PostDetailView {
 
@@ -58,18 +59,12 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
 
     @Override
     public void setPicture(File imageFile){
-        Picasso.get()
-                .load(imageFile)
-                .resize(400, 0)
-                .centerCrop()
-                .into(postImage);
+        ActivityHelper.setImageWithPicasso(imageFile,postImage);
     }
 
     @Override
     public void setPicture(String url){
-        Picasso.get()
-                .load(url)
-                .into(postImage);
+        ActivityHelper.setImageWithPicasso(url, postImage);
     }
 
     private void setUpPresenter(){
@@ -81,7 +76,7 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
 
     private void initToolbar(){
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        checkNotNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

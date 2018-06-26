@@ -1,32 +1,42 @@
-package com.elsy.simpleinstagram.app.Home;
+package com.elsy.simpleinstagram.app.home;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.elsy.simpleinstagram.data.common.Repository;
 import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
 import com.elsy.simpleinstagram.domain.Post;
+import com.elsy.simpleinstagram.utils.AppConstants;
 import com.elsy.simpleinstagram.utils.camera.CameraHelper;
 import com.elsy.simpleinstagram.utils.camera.PermissionsHelper;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.List;
 
 public class HomePresenter implements HomeContract.UserActionsListener, ListCallback<Post> {
 
-    private Activity activity;
-    private HomeContract.HomeView view;
-    private CameraHelper camera;
-    private Repository<Post> postRepository;
+    private final Activity activity;
+    private final HomeContract.HomeView view;
+    private final CameraHelper camera;
+    private final Repository<Post> postRepository;
 
-    private String ERROR_ADD_NEW_POST = "This permission is required to share a new post";
-    private String ERROR_NOT_CAMERAA = "This device don't have a camera";
+    private static final String ERROR_ADD_NEW_POST = "This permission is required to share a new post";
+    private static final String ERROR_NOT_CAMERA = "This device don't have a camera";
+    private final Gson gson;
 
-    public HomePresenter(HomeContract.HomeView view, CameraHelper camera, Repository<Post> postRepository) {
+    HomePresenter(
+            HomeContract.HomeView view,
+            Gson gson, CameraHelper camera,
+            Repository<Post> postRepository
+    ) {
         this.view = view;
+        this.gson = gson;
         this.activity = ((AppCompatActivity) view);
         this.camera = camera;
         this.postRepository = postRepository;
@@ -47,9 +57,18 @@ public class HomePresenter implements HomeContract.UserActionsListener, ListCall
     }
 
     @Override
+    public void onClickPicture(Post post, View pictureView) {
+        Bundle extras = ActivityOptionsCompat
+                .makeScaleUpAnimation(pictureView, 0, 0, pictureView.getWidth(), pictureView.getHeight())
+                .toBundle();
+        extras.putSerializable(AppConstants.KEY_POST, gson.toJson(post));
+        view.sendPostDetail(extras);
+    }
+
+    @Override
     public void shareNewPost() {
         Bundle extras = new Bundle();
-        extras.putString("filepath",  camera.getPictureFilePath());
+        extras.putString(AppConstants.KEY_FILE_PATH,  camera.getPictureFilePath());
         view.sendToNewPost(extras);
     }
 
@@ -62,7 +81,7 @@ public class HomePresenter implements HomeContract.UserActionsListener, ListCall
                 view.showFailedLoadMessage(e.getMessage());
             }
         } else {
-            view.showFailedLoadMessage(ERROR_NOT_CAMERAA);
+            view.showFailedLoadMessage(ERROR_NOT_CAMERA);
         }
     }
 

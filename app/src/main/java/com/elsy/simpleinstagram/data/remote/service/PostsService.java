@@ -1,6 +1,6 @@
 package com.elsy.simpleinstagram.data.remote.service;
 
-import com.elsy.simpleinstagram.data.APIConstants;
+import com.elsy.simpleinstagram.data.remote.APIConstants;
 import com.elsy.simpleinstagram.domain.Post;
 
 import java.util.List;

@@ -4,6 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.widget.ImageView;
+
+import com.elsy.simpleinstagram.data.remote.APIConstants;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ActivityHelper {
 
@@ -24,11 +33,6 @@ public class ActivityHelper {
         ActivityCompat.startActivity(activity, intent, extras);
     }
 
-    public static void begin(Activity activity, Class classTo){
-        Intent intent = new Intent().setClass(activity, classTo);
-        activity.startActivity(intent);
-    }
-
     /**
      * Helper method to determine if a object is null.
      * This class throws a {@link NullPointerException} whether the object is null.
@@ -42,5 +46,30 @@ public class ActivityHelper {
             throw new NullPointerException();
         }
         return reference;
+    }
+
+    public static void setImageWithPicasso(File imageFile, ImageView picture){
+        Picasso.get()
+                .load(imageFile)
+                .resize(AppConstants.RESIZE_WIDTH, AppConstants.RESIZE_HEIGHT)
+                .centerCrop()
+                .into(picture);
+    }
+
+    public static void setImageWithPicasso(String image, ImageView picture){
+        Picasso.get()
+                .load(image)
+                .into(picture);
+    }
+
+    public static boolean isValidHostame(String hostname){
+        return APIConstants.URL.contains(hostname);
+    }
+
+    public static String getTimeString(String format){
+        return new SimpleDateFormat(
+                format,
+                Locale.getDefault()
+        ).format(new Date());
     }
 }

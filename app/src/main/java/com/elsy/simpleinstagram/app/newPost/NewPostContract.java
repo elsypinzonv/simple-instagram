@@ -1,11 +1,9 @@
-package com.elsy.simpleinstagram.app.NewPost;
-
-import android.graphics.Bitmap;
+package com.elsy.simpleinstagram.app.newPost;
 
 import java.io.File;
 
 
-public interface NewPostContract {
+interface NewPostContract {
 
     interface NewPostView {
 

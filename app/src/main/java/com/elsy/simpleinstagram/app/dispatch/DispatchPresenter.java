@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.app.Dispatch;
+package com.elsy.simpleinstagram.app.dispatch;
 
 import com.elsy.simpleinstagram.data.common.Repository;
 import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
@@ -8,10 +8,10 @@ import java.util.List;
 
 public class DispatchPresenter implements DispatchContract.UserActionsListener, ListCallback<Post> {
 
-    private DispatchContract.DispatchView view;
-    private Repository<Post> postRepository;
+    private final DispatchContract.DispatchView view;
+    private final Repository<Post> postRepository;
 
-    public DispatchPresenter(DispatchContract.DispatchView view, Repository<Post> postRepository) {
+    DispatchPresenter(DispatchContract.DispatchView view, Repository<Post> postRepository) {
         this.view = view;
         this.postRepository = postRepository;
     }

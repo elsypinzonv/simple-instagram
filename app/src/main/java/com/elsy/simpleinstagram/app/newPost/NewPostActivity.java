@@ -1,6 +1,5 @@
-package com.elsy.simpleinstagram.app.NewPost;
+package com.elsy.simpleinstagram.app.newPost;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -13,16 +12,18 @@ import android.widget.ImageView;
 
 import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.R;
-import com.squareup.picasso.Picasso;
+import com.elsy.simpleinstagram.utils.ActivityHelper;
 
 import java.io.File;
+
+import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
 
 public class NewPostActivity extends AppCompatActivity implements NewPostContract.NewPostView {
 
     private Toolbar toolbar;
     private ImageView picture;
     private TextInputEditText title;
-    private TextInputEditText comnent;
+    private TextInputEditText comment;
     private NewPostPresenter presenter;
 
     @Override
@@ -37,10 +38,7 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
 
     @Override
     public void showPicture(File file) {
-        Picasso.get()
-                .load(file)
-                .resize(400, 0)
-                .into(picture);
+        ActivityHelper.setImageWithPicasso(file, picture);
     }
 
     @Override
@@ -50,7 +48,7 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
 
     @Override
     public void showFailedLoadMessage(String error) {
-        Snackbar.make(comnent, error, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(comment, error, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -58,8 +56,8 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
         if(title.getText().toString().isEmpty()){
             title.setError(error);
         }
-        if(comnent.getText().toString().isEmpty()){
-            comnent.setError(error);
+        if(comment.getText().toString().isEmpty()){
+            comment.setError(error);
         }
 
     }
@@ -79,7 +77,7 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
         int id = item.getItemId();
 
         if (id == R.id.action_save) {
-            presenter.savePost(title.getText().toString(), comnent.getText().toString());
+            presenter.savePost(title.getText().toString(), comment.getText().toString());
             return true;
         }
 
@@ -88,7 +86,7 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
 
     private void initToolbar(){
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        checkNotNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +100,6 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
         toolbar = findViewById(R.id.toolbar);
         picture = findViewById(R.id.post_picture);
         title = findViewById(R.id.title);
-        comnent = findViewById(R.id.comment);
+        comment = findViewById(R.id.comment);
     }
 }

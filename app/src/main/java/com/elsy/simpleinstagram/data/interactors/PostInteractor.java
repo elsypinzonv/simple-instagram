@@ -1,7 +1,8 @@
-package com.elsy.simpleinstagram.data;
+package com.elsy.simpleinstagram.data.interactors;
 
-import android.util.Log;
+import android.support.annotation.NonNull;
 
+import com.elsy.simpleinstagram.data.interactors.BaseInteractor;
 import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
 import com.elsy.simpleinstagram.data.remote.service.PostsService;
 import com.elsy.simpleinstagram.domain.Post;
@@ -11,31 +12,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostsInteractor extends BaseInteractor<PostsService> {
+public class PostInteractor extends BaseInteractor<PostsService> {
 
-    public PostsInteractor(PostsService sessionsAPIService) {
+    private final String  SERVER_ERROR ="An error has occurred in the server";
+
+    public PostInteractor(PostsService sessionsAPIService) {
         super(sessionsAPIService);
     }
 
     public void getPosts(final ListCallback<Post> callback){
         Call<List<Post>> call = apiService.listPosts();
-        Log.d("TESTK", "REQUEST: " + call.request().toString());
 
         call.enqueue(new Callback<List<Post>>() {
             @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                Log.d("TESTK", "RESPONSE: " + response.raw().toString());
+            public void onResponse(@NonNull Call<List<Post>> call, @NonNull Response<List<Post>> response) {
 
                 if (response.isSuccessful()) {
                     List<Post> responseBody = response.body();
                     callback.onItemsLoaded(responseBody);
                 } else {
-                    callback.onServerError("Ha ocurrido un error");
+                    callback.onServerError(SERVER_ERROR);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Post>> call, @NonNull Throwable t) {
                 t.printStackTrace();
                 callback.onServerError(t.getMessage());
             }

@@ -3,7 +3,7 @@ package com.elsy.simpleinstagram;
 import android.app.Activity;
 import android.content.Context;
 
-import com.elsy.simpleinstagram.data.PostsInteractor;
+import com.elsy.simpleinstagram.data.interactors.PostInteractor;
 import com.elsy.simpleinstagram.data.common.PostsRepository;
 import com.elsy.simpleinstagram.data.local.PostLocalRepository;
 import com.elsy.simpleinstagram.data.local.realm.mappers.RealmPostToPostMapper;
@@ -22,11 +22,9 @@ public class Injection {
         return new Gson();
     }
 
-
     public static CameraHelper provideCameraHelper(Activity activity) {
         return new CameraHelper(activity);
     }
-
 
     public static PostsRepository providePostsRepository(Context context) {
         Realm.init(context);
@@ -47,12 +45,11 @@ public class Injection {
         );
     }
 
-    private static PostsInteractor providePostInteractor(){
-        return new PostsInteractor(providePostService());
+    private static PostInteractor providePostInteractor(){
+        return new PostInteractor(providePostService());
     }
 
     private static PostsService providePostService(){
         return ServiceGenerator.createService(PostsService.class);
     }
-
 }
