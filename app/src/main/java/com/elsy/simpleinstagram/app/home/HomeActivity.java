@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,6 @@ import android.view.View;
 
 import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.app.newPost.NewPostActivity;
-import com.elsy.simpleinstagram.utils.AppConstants;
 import com.elsy.simpleinstagram.utils.camera.CameraHelper;
 import com.elsy.simpleinstagram.utils.ActivityHelper;
 import com.elsy.simpleinstagram.view.adapters.PostAdapter;
@@ -22,10 +20,11 @@ import com.elsy.simpleinstagram.view.listeners.PostItemListener;
 import com.elsy.simpleinstagram.R;
 import com.elsy.simpleinstagram.app.postDetail.PostDetailActivity;
 import com.elsy.simpleinstagram.domain.Post;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
 
 public class HomeActivity extends AppCompatActivity implements PostItemListener, HomeContract.HomeView {
 
@@ -54,12 +53,7 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
 
     @Override
     public void onPostClick(Post clickedPost, View view) {
-        Bundle extras = ActivityOptionsCompat
-                .makeScaleUpAnimation(view, 0, 0, view.getWidth(), view.getHeight())
-                .toBundle();
-        extras.putSerializable(AppConstants.KEY_POST,  new Gson().toJson(clickedPost));
-        ActivityHelper.begin(this,PostDetailActivity.class, extras);
-
+        presenter.onClickPicture(clickedPost, view);
     }
 
     private void initRecyclerView(){
@@ -78,6 +72,7 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
     private void setUpPresenter(){
         presenter = new HomePresenter(
                 this,
+                Injection.provideGSON(),
                 Injection.provideCameraHelper(this),
                 Injection.providePostsRepository(this)
         );
@@ -94,7 +89,7 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
 
     private void initToolbar(){
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        checkNotNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher_round);
     }
 
@@ -115,6 +110,11 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
     @Override
     public void sendToNewPost(Bundle extras) {
         ActivityHelper.begin(this, NewPostActivity.class, extras);
+    }
+
+    @Override
+    public void sendPostDetail(Bundle extras) {
+        ActivityHelper.begin(this,PostDetailActivity.class, extras);
     }
 
 

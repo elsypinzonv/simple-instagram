@@ -16,6 +16,8 @@ import com.elsy.simpleinstagram.utils.ActivityHelper;
 
 import java.io.File;
 
+import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
+
 public class PostDetailActivity extends AppCompatActivity implements PostDetailContract.PostDetailView {
 
     private Toolbar toolbar;
@@ -74,7 +76,7 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
 
     private void initToolbar(){
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        checkNotNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

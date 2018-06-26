@@ -15,9 +15,9 @@ import java.io.File;
 public class NewPostPresenter implements NewPostContract.UserActionsListener, RealmCallback {
 
 
-    private Activity activity;
-    private NewPostContract.NewPostView view;
-    private PostsRepository repository;
+    private final Activity activity;
+    private final NewPostContract.NewPostView view;
+    private final PostsRepository repository;
     private String filePath;
     private static final String ERROR_EMPTY = "This field is obligatory";
     private static final String ERROR_PICTURE_NOT_FOUND = "This field is obligatory";

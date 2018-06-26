@@ -14,9 +14,9 @@ import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
 
 public class PostDetailPresenter implements PostDetailContract.UserActionsListener {
 
-    private Gson gson;
-    private Activity activityContext;
-    protected PostDetailContract.PostDetailView view;
+    private final Gson gson;
+    private final Activity activityContext;
+    private final PostDetailContract.PostDetailView view;
 
     private static final String ERROR_MESSAGE = "Error getting the data";
 

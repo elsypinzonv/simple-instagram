@@ -23,11 +23,6 @@ public class DispatchActivity extends AppCompatActivity implements DispatchContr
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     public void onError(String error) {
         Snackbar.make(getWindow().getDecorView().getRootView(), error, Snackbar.LENGTH_LONG).show();
         sendHome();

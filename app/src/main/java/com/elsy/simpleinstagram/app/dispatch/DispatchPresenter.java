@@ -8,8 +8,8 @@ import java.util.List;
 
 public class DispatchPresenter implements DispatchContract.UserActionsListener, ListCallback<Post> {
 
-    private DispatchContract.DispatchView view;
-    private Repository<Post> postRepository;
+    private final DispatchContract.DispatchView view;
+    private final Repository<Post> postRepository;
 
     DispatchPresenter(DispatchContract.DispatchView view, Repository<Post> postRepository) {
         this.view = view;

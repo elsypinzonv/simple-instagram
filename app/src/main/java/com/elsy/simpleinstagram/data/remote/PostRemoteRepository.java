@@ -9,7 +9,7 @@ import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
 
 public class PostRemoteRepository implements Repository<Post> {
 
-    private PostInteractor interactor;
+    private final PostInteractor interactor;
 
     public PostRemoteRepository(
             PostInteractor interactor

@@ -9,8 +9,8 @@ import com.elsy.simpleinstagram.R;
 
 public class PostViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView postPicture;
-        TextView postTitle;
+        final ImageView postPicture;
+        final TextView postTitle;
 
          PostViewHolder(View view) {
             super(view);

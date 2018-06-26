@@ -1,6 +1,6 @@
 package com.elsy.simpleinstagram.app.dispatch;
 
-public class DispatchContract {
+class DispatchContract {
 
     interface DispatchView {
 

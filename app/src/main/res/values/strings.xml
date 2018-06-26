@@ -11,7 +11,7 @@
     <string name="action_save">Save</string>
 
     <!-- ImageView content description -->
-    <string name="picture">This a custom picture</string>
+    <string name="picture_content_description">This a custom picture</string>
     <string name="id_content_description">This icon for the id</string>
     <string name="time_content_description">This icon for the time</string>
     <string name="comment_content_description">This icon for a comment</string>

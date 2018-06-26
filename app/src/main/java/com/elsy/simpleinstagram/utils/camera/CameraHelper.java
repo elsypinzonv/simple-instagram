@@ -19,7 +19,7 @@ public class CameraHelper {
     private static final String FILE_PROVIDER_PATH = ".fileprovider";
     private static final String SUFFIX_IMAGE_FORMAT = ".jpg";
     private static final String TIME_FORMAT = "yyyyMMddHHmmss";
-    private Activity activity;
+    private final Activity activity;
     private String pictureFilePath;
 
     public CameraHelper(Activity activity) {

@@ -24,7 +24,7 @@ public abstract class RealmRepository<RealmEntity extends RealmModel, DomainEnti
      * @param realmConfiguration setup for specific Realm instance.
      * @param mapper bridge between realm objects and domain model objects.
      */
-    public RealmRepository(final RealmConfiguration realmConfiguration, Mapper<RealmEntity, DomainEntity> mapper) {
+    protected RealmRepository(final RealmConfiguration realmConfiguration, Mapper<RealmEntity, DomainEntity> mapper) {
         this.realmConfiguration = realmConfiguration;
         this.toDomainEntityMapper = mapper;
     }

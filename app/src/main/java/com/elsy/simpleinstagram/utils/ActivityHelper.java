@@ -62,7 +62,7 @@ public class ActivityHelper {
                 .into(picture);
     }
 
-    public static final boolean isValidHostame(String hostname){
+    public static boolean isValidHostame(String hostname){
         return APIConstants.URL.contains(hostname);
     }
 

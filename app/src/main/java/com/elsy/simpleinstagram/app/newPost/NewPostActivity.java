@@ -16,6 +16,8 @@ import com.elsy.simpleinstagram.utils.ActivityHelper;
 
 import java.io.File;
 
+import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
+
 public class NewPostActivity extends AppCompatActivity implements NewPostContract.NewPostView {
 
     private Toolbar toolbar;
@@ -84,7 +86,7 @@ public class NewPostActivity extends AppCompatActivity implements NewPostContrac
 
     private void initToolbar(){
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        checkNotNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
