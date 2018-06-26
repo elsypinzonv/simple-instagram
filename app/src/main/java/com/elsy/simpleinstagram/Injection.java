@@ -3,7 +3,7 @@ package com.elsy.simpleinstagram;
 import android.app.Activity;
 import android.content.Context;
 
-import com.elsy.simpleinstagram.data.PostsInteractor;
+import com.elsy.simpleinstagram.data.PostInteractor;
 import com.elsy.simpleinstagram.data.common.PostsRepository;
 import com.elsy.simpleinstagram.data.local.PostLocalRepository;
 import com.elsy.simpleinstagram.data.local.realm.mappers.RealmPostToPostMapper;
@@ -45,8 +45,8 @@ public class Injection {
         );
     }
 
-    private static PostsInteractor providePostInteractor(){
-        return new PostsInteractor(providePostService());
+    private static PostInteractor providePostInteractor(){
+        return new PostInteractor(providePostService());
     }
 
     private static PostsService providePostService(){

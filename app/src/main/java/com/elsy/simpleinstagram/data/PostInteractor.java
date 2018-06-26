@@ -11,11 +11,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostsInteractor extends BaseInteractor<PostsService> {
+public class PostInteractor extends BaseInteractor<PostsService> {
 
     private final String  SERVER_ERROR ="An error has occurred in the server";
 
-    public PostsInteractor(PostsService sessionsAPIService) {
+    public PostInteractor(PostsService sessionsAPIService) {
         super(sessionsAPIService);
     }
 

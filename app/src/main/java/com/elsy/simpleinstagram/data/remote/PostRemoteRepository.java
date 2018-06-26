@@ -1,7 +1,7 @@
 package com.elsy.simpleinstagram.data.remote;
 
 import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
-import com.elsy.simpleinstagram.data.PostsInteractor;
+import com.elsy.simpleinstagram.data.PostInteractor;
 import com.elsy.simpleinstagram.data.common.Repository;
 import com.elsy.simpleinstagram.domain.Post;
 
@@ -9,10 +9,10 @@ import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
 
 public class PostRemoteRepository implements Repository<Post> {
 
-    private PostsInteractor interactor;
+    private PostInteractor interactor;
 
     public PostRemoteRepository(
-            PostsInteractor interactor
+            PostInteractor interactor
     ){
         this.interactor = checkNotNull(interactor);
     }
