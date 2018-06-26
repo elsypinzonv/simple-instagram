@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_marginTop="5dp"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -24,18 +24,20 @@
             android:padding="5dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            >
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/id_content_description"
                 android:src="@drawable/ic_id"/>
 
             <TextView
                 android:id="@+id/id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -43,18 +45,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="5dp">
+            android:padding="5dp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/time_content_description"
                 android:src="@drawable/ic_created_at"/>
 
             <TextView
                 android:id="@+id/created_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp" />
         </LinearLayout>
 
 
@@ -63,18 +68,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="5dp">
+            android:padding="5dp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_commnet"/>
+                android:contentDescription="@string/comment_content_description"
+                android:src="@drawable/ic_comment"/>
 
             <TextView
                 android:id="@+id/comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp" />
         </LinearLayout>
 
 

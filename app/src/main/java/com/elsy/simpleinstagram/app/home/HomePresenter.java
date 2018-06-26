@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.elsy.simpleinstagram.data.common.Repository;
 import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
 import com.elsy.simpleinstagram.domain.Post;
+import com.elsy.simpleinstagram.utils.AppConstants;
 import com.elsy.simpleinstagram.utils.camera.CameraHelper;
 import com.elsy.simpleinstagram.utils.camera.PermissionsHelper;
 
@@ -22,10 +23,10 @@ public class HomePresenter implements HomeContract.UserActionsListener, ListCall
     private CameraHelper camera;
     private Repository<Post> postRepository;
 
-    private String ERROR_ADD_NEW_POST = "This permission is required to share a new post";
-    private String ERROR_NOT_CAMERAA = "This device don't have a camera";
+    private static final String ERROR_ADD_NEW_POST = "This permission is required to share a new post";
+    private static final String ERROR_NOT_CAMERA = "This device don't have a camera";
 
-    public HomePresenter(HomeContract.HomeView view, CameraHelper camera, Repository<Post> postRepository) {
+    HomePresenter(HomeContract.HomeView view, CameraHelper camera, Repository<Post> postRepository) {
         this.view = view;
         this.activity = ((AppCompatActivity) view);
         this.camera = camera;
@@ -49,7 +50,7 @@ public class HomePresenter implements HomeContract.UserActionsListener, ListCall
     @Override
     public void shareNewPost() {
         Bundle extras = new Bundle();
-        extras.putString("filepath",  camera.getPictureFilePath());
+        extras.putString(AppConstants.KEY_FILE_PATH,  camera.getPictureFilePath());
         view.sendToNewPost(extras);
     }
 
@@ -62,7 +63,7 @@ public class HomePresenter implements HomeContract.UserActionsListener, ListCall
                 view.showFailedLoadMessage(e.getMessage());
             }
         } else {
-            view.showFailedLoadMessage(ERROR_NOT_CAMERAA);
+            view.showFailedLoadMessage(ERROR_NOT_CAMERA);
         }
     }
 

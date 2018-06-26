@@ -33,7 +33,7 @@ public class NewPostPresenter implements NewPostContract.UserActionsListener, Re
 
     @Override
     public void getPicture() {
-        String path = activity.getIntent().getStringExtra(AppConstants.KEY_POST);
+        String path = activity.getIntent().getStringExtra(AppConstants.KEY_FILE_PATH);
         this.filePath = path;
         if (path != null) {
             Uri imageUri = Uri.parse(path);

@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.app.newPost.NewPostActivity;
+import com.elsy.simpleinstagram.utils.AppConstants;
 import com.elsy.simpleinstagram.utils.camera.CameraHelper;
 import com.elsy.simpleinstagram.utils.ActivityHelper;
 import com.elsy.simpleinstagram.view.adapters.PostAdapter;
@@ -56,7 +57,7 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
         Bundle extras = ActivityOptionsCompat
                 .makeScaleUpAnimation(view, 0, 0, view.getWidth(), view.getHeight())
                 .toBundle();
-        extras.putSerializable("post",  new Gson().toJson(clickedPost));
+        extras.putSerializable(AppConstants.KEY_POST,  new Gson().toJson(clickedPost));
         ActivityHelper.begin(this,PostDetailActivity.class, extras);
 
     }

@@ -11,7 +11,7 @@ public class DispatchPresenter implements DispatchContract.UserActionsListener, 
     private DispatchContract.DispatchView view;
     private Repository<Post> postRepository;
 
-    public DispatchPresenter(DispatchContract.DispatchView view, Repository<Post> postRepository) {
+    DispatchPresenter(DispatchContract.DispatchView view, Repository<Post> postRepository) {
         this.view = view;
         this.postRepository = postRepository;
     }
