@@ -62,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
     }
 
     private void initRecyclerView(){
-        postAdapter = new PostAdapter(this,  new ArrayList<Post>(0), this);
+        postAdapter = new PostAdapter(new ArrayList<Post>(0), this);
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setHasFixedSize(true);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(this));
