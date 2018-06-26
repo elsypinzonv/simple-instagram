@@ -26,7 +26,6 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-
 ext {
 
     supportLibrary = '27.1.1'
