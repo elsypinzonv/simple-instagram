@@ -1,5 +1,7 @@
 package com.elsy.simpleinstagram.data.local;
 
+import android.support.annotation.NonNull;
+
 import com.elsy.simpleinstagram.data.local.realm.RealmCallback;
 import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
 import com.elsy.simpleinstagram.data.local.realm.RealmRepository;
@@ -20,7 +22,7 @@ import io.realm.RealmResults;
 public class PostLocalRepository extends RealmRepository<RealmPost, Post> {
 
     private static PostLocalRepository INSTANCE;
-    private String ERROR_MESSAGE = "NOT VALUES FOUND";
+    private static final String ERROR_MESSAGE = "NOT VALUES FOUND";
 
     private PostLocalRepository(RealmConfiguration realmConfiguration, Mapper mapper) {
         super(realmConfiguration, mapper);
@@ -43,7 +45,7 @@ public class PostLocalRepository extends RealmRepository<RealmPost, Post> {
         realm.executeTransactionAsync(
                 new Realm.Transaction() {
                     @Override
-                    public void execute(Realm realm) {
+                    public void execute(@NonNull Realm realm) {
                         final RealmPost realmPost = realm.createObject(RealmPost.class, post.getId());
                         realmPost.setComment(post.getComment());
                         realmPost.setPhoto(post.getPhoto());
@@ -59,7 +61,7 @@ public class PostLocalRepository extends RealmRepository<RealmPost, Post> {
                 },
                 new Realm.Transaction.OnError() {
                     @Override
-                    public void onError(Throwable error) {
+                    public void onError(@NonNull Throwable error) {
                         realmCallback.onErrorRealmAction(error.getMessage());
                     }
                 }
