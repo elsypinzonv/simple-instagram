@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
@@ -36,6 +37,7 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
     private FloatingActionButton addButton;
     private PostAdapter postAdapter;
     private HomePresenter presenter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
         initRecyclerView();
         setUpPresenter();
         initButton();
+        initToolbar();
     }
 
     @Override
@@ -73,6 +76,7 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
     private void bindViews(){
         postRecyclerView = findViewById(R.id.posts);
         addButton = findViewById(R.id.add_button);
+        toolbar = findViewById(R.id.toolbar);
     }
 
     private void setUpPresenter(){
@@ -92,6 +96,11 @@ public class HomeActivity extends AppCompatActivity implements PostItemListener,
         });
     }
 
+    private void initToolbar(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher_round);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
