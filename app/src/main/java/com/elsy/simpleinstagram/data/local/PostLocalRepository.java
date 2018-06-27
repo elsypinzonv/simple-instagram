@@ -3,12 +3,12 @@ package com.elsy.simpleinstagram.data.local;
 import android.support.annotation.NonNull;
 
 import com.elsy.simpleinstagram.data.local.realm.RealmCallback;
-import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
+import com.elsy.simpleinstagram.data.remote.callback.ListCallback;
 import com.elsy.simpleinstagram.data.local.realm.RealmRepository;
 import com.elsy.simpleinstagram.data.local.realm.mappers.Mapper;
 import com.elsy.simpleinstagram.data.local.realm.models.RealmPost;
 import com.elsy.simpleinstagram.data.local.realm.specification.AllRealmSpecification;
-import com.elsy.simpleinstagram.data.remote.callbacks.ServerCallback;
+import com.elsy.simpleinstagram.data.remote.callback.ServerCallback;
 import com.elsy.simpleinstagram.domain.Post;
 
 import java.util.ArrayList;

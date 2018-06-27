@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.utils.camera;
+package com.elsy.simpleinstagram.util.camera;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;

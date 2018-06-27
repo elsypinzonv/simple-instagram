@@ -1,7 +1,7 @@
 package com.elsy.simpleinstagram.app.dispatch;
 
 import com.elsy.simpleinstagram.data.common.Repository;
-import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
+import com.elsy.simpleinstagram.data.remote.callback.ListCallback;
 import com.elsy.simpleinstagram.domain.Post;
 
 import java.util.List;

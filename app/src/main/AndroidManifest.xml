@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <provider
-            android:name=".utils.camera.GenericFileProvider"
+            android:name=".util.camera.GenericFileProvider"
             android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">

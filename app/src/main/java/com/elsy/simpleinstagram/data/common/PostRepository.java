@@ -5,17 +5,17 @@ import android.support.annotation.NonNull;
 import com.elsy.simpleinstagram.data.local.PostLocalRepository;
 import com.elsy.simpleinstagram.data.local.realm.RealmCallback;
 import com.elsy.simpleinstagram.data.remote.PostRemoteRepository;
-import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
+import com.elsy.simpleinstagram.data.remote.callback.ListCallback;
 import com.elsy.simpleinstagram.domain.Post;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
+import static com.elsy.simpleinstagram.util.ActivityHelper.checkNotNull;
 
-public class PostsRepository implements Repository<Post> {
+public class PostRepository implements Repository<Post> {
 
-    private static PostsRepository INSTANCE = null;
+    private static PostRepository INSTANCE = null;
 
     private final PostRemoteRepository remoteDataSource;
 
@@ -27,7 +27,7 @@ public class PostsRepository implements Repository<Post> {
     private ArrayList<Post> cache;
 
 
-    private PostsRepository(
+    private PostRepository(
             @NonNull PostRemoteRepository remoteDataSource,
             @NonNull PostLocalRepository localDataSource) {
         this.remoteDataSource = checkNotNull(remoteDataSource);
@@ -41,10 +41,10 @@ public class PostsRepository implements Repository<Post> {
      * @param localDataSource  the device storage data source
      * @return the {@link Repository} instance
      */
-    public static PostsRepository getInstance(PostRemoteRepository remoteDataSource,
-                                              PostLocalRepository localDataSource){
+    public static PostRepository getInstance(PostRemoteRepository remoteDataSource,
+                                             PostLocalRepository localDataSource){
         if (INSTANCE == null) {
-            INSTANCE = new PostsRepository(remoteDataSource, localDataSource);
+            INSTANCE = new PostRepository(remoteDataSource, localDataSource);
         }
         return INSTANCE;
     }
@@ -53,7 +53,7 @@ public class PostsRepository implements Repository<Post> {
      * Gets posts from cache, local data source (Realm) or remote data source, whichever is
      * available first.
      * <p>
-     * Method {@link com.elsy.simpleinstagram.data.remote.callbacks.ServerCallback#onServerError(String)}
+     * Method {@link com.elsy.simpleinstagram.data.remote.callback.ServerCallback#onServerError(String)}
      * is fired if all data sources fail to get the data.
      *
      * @param callback observer of the server request that expects a list of results.

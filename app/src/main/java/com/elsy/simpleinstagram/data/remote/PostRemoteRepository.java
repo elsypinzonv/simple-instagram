@@ -1,11 +1,11 @@
 package com.elsy.simpleinstagram.data.remote;
 
-import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
-import com.elsy.simpleinstagram.data.interactors.PostInteractor;
+import com.elsy.simpleinstagram.data.remote.callback.ListCallback;
+import com.elsy.simpleinstagram.interactor.PostInteractor;
 import com.elsy.simpleinstagram.data.common.Repository;
 import com.elsy.simpleinstagram.domain.Post;
 
-import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
+import static com.elsy.simpleinstagram.util.ActivityHelper.checkNotNull;
 
 public class PostRemoteRepository implements Repository<Post> {
 

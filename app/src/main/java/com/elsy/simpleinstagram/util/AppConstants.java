@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.utils;
+package com.elsy.simpleinstagram.util;
 
 public class AppConstants {
 
