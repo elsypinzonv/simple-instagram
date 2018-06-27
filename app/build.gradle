@@ -17,12 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    flavorDimensions "demo"
+    flavorDimensions "api"
 
     productFlavors {
         prod {
             applicationId "com.elsy.simpleinstagram.prod"
-            dimension "demo"
+            dimension "api"
         }
     }
 
