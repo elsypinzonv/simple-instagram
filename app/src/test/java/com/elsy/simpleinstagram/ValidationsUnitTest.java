@@ -1,6 +1,6 @@
 package com.elsy.simpleinstagram;
 
-import com.elsy.simpleinstagram.utils.ActivityHelper;
+import com.elsy.simpleinstagram.util.ActivityHelper;
 
 import org.junit.Test;
 

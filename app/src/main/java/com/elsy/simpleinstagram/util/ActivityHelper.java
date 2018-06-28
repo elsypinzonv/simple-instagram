@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.utils;
+package com.elsy.simpleinstagram.util;
 
 import android.app.Activity;
 import android.content.Intent;

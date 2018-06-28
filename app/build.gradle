@@ -17,6 +17,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "elsy"
+
+    productFlavors {
+
+        mock {
+            applicationIdSuffix = ".mock"
+            dimension "elsy"
+        }
+
+        prod {
+            dimension "elsy"
+        }
+
+    }
+    android.variantFilter { variant ->
+        if (variant.buildType.name.equals('release')
+                && variant.getFlavors().get(0).name.equals('mock')) {
+            variant.setIgnore(true);
+        }
+    }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/test/assets/'] } }
 }
 
 dependencies {

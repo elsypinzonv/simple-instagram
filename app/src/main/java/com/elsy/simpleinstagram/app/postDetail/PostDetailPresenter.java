@@ -5,12 +5,12 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 
 import com.elsy.simpleinstagram.domain.Post;
-import com.elsy.simpleinstagram.utils.AppConstants;
+import com.elsy.simpleinstagram.util.AppConstants;
 import com.google.gson.Gson;
 
 import java.io.File;
 
-import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
+import static com.elsy.simpleinstagram.util.ActivityHelper.checkNotNull;
 
 public class PostDetailPresenter implements PostDetailContract.UserActionsListener {
 

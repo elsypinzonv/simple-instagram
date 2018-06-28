@@ -13,8 +13,8 @@ import android.view.View;
 
 import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.app.newPost.NewPostActivity;
-import com.elsy.simpleinstagram.utils.camera.CameraHelper;
-import com.elsy.simpleinstagram.utils.ActivityHelper;
+import com.elsy.simpleinstagram.util.camera.CameraHelper;
+import com.elsy.simpleinstagram.util.ActivityHelper;
 import com.elsy.simpleinstagram.view.adapters.PostAdapter;
 import com.elsy.simpleinstagram.view.listeners.PostItemListener;
 import com.elsy.simpleinstagram.R;
@@ -24,7 +24,7 @@ import com.elsy.simpleinstagram.domain.Post;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
+import static com.elsy.simpleinstagram.util.ActivityHelper.checkNotNull;
 
 public class HomeActivity extends AppCompatActivity implements PostItemListener, HomeContract.HomeView {
 

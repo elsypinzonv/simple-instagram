@@ -12,11 +12,11 @@ import android.widget.ImageView;
 
 import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.R;
-import com.elsy.simpleinstagram.utils.ActivityHelper;
+import com.elsy.simpleinstagram.util.ActivityHelper;
 
 import java.io.File;
 
-import static com.elsy.simpleinstagram.utils.ActivityHelper.checkNotNull;
+import static com.elsy.simpleinstagram.util.ActivityHelper.checkNotNull;
 
 public class NewPostActivity extends AppCompatActivity implements NewPostContract.NewPostView {
 

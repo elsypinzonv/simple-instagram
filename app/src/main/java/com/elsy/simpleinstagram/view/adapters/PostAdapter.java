@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.elsy.simpleinstagram.utils.ActivityHelper;
+import com.elsy.simpleinstagram.util.ActivityHelper;
 import com.elsy.simpleinstagram.view.listeners.PostItemListener;
 import com.elsy.simpleinstagram.R;
 import com.elsy.simpleinstagram.domain.Post;

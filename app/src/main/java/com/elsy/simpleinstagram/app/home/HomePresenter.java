@@ -9,11 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.elsy.simpleinstagram.data.common.Repository;
-import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
+import com.elsy.simpleinstagram.data.remote.callback.ListCallback;
 import com.elsy.simpleinstagram.domain.Post;
-import com.elsy.simpleinstagram.utils.AppConstants;
-import com.elsy.simpleinstagram.utils.camera.CameraHelper;
-import com.elsy.simpleinstagram.utils.camera.PermissionsHelper;
+import com.elsy.simpleinstagram.util.AppConstants;
+import com.elsy.simpleinstagram.util.camera.CameraHelper;
+import com.elsy.simpleinstagram.util.camera.PermissionsHelper;
 import com.google.gson.Gson;
 
 import java.io.IOException;

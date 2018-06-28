@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.utils.camera;
+package com.elsy.simpleinstagram.util.camera;
 
 import android.Manifest;
 import android.app.Activity;
@@ -8,7 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 
-import com.elsy.simpleinstagram.utils.ActivityHelper;
+import com.elsy.simpleinstagram.util.ActivityHelper;
 
 import java.io.File;
 import java.io.IOException;

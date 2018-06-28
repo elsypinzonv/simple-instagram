@@ -1,9 +1,8 @@
-package com.elsy.simpleinstagram.data.interactors;
+package com.elsy.simpleinstagram.interactor;
 
 import android.support.annotation.NonNull;
 
-import com.elsy.simpleinstagram.data.interactors.BaseInteractor;
-import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
+import com.elsy.simpleinstagram.data.remote.callback.ListCallback;
 import com.elsy.simpleinstagram.data.remote.service.PostsService;
 import com.elsy.simpleinstagram.domain.Post;
 
