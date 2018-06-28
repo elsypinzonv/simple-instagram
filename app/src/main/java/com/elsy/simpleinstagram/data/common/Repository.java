@@ -1,6 +1,6 @@
 package com.elsy.simpleinstagram.data.common;
 
-import com.elsy.simpleinstagram.data.remote.callbacks.ListCallback;
+import com.elsy.simpleinstagram.data.remote.callback.ListCallback;
 
 /**
  * Main entry point for accessing domain data across the application.

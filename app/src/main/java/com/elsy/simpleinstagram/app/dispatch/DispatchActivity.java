@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.elsy.simpleinstagram.Injection;
 import com.elsy.simpleinstagram.R;
 import com.elsy.simpleinstagram.app.home.HomeActivity;
-import com.elsy.simpleinstagram.utils.ActivityHelper;
+import com.elsy.simpleinstagram.util.ActivityHelper;
 
 
 public class DispatchActivity extends AppCompatActivity implements DispatchContract.DispatchView {

@@ -1,4 +1,4 @@
-package com.elsy.simpleinstagram.data.remote.callbacks;
+package com.elsy.simpleinstagram.data.remote.callback;
 
 import java.util.List;
 

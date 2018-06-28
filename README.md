@@ -4,6 +4,13 @@
 This is an interview project. The Android app should be like the Instagram application but
 simpler. 
 
+## <a name="Build">Build Variants</a>
+- **prodDebug**
+Use it to Run the project using the endpoint: https://photomaton.herokuapp.com/api/photo
+
+- **mockDebug**
+Use it to Run the project using a mock JSON instead of the endpoint.
+
 ## <a name="Functionalities">Functionalities</a>
 - Gets the objects(Post) from a JSON document in the endpoint:  https://photomaton.herokuapp.com/api/photo
 ``` Gson

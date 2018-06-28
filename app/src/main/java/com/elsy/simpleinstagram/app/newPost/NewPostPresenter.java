@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 
-import com.elsy.simpleinstagram.data.common.PostsRepository;
+import com.elsy.simpleinstagram.data.common.PostRepository;
 import com.elsy.simpleinstagram.data.local.realm.RealmCallback;
 import com.elsy.simpleinstagram.domain.Post;
-import com.elsy.simpleinstagram.utils.ActivityHelper;
-import com.elsy.simpleinstagram.utils.AppConstants;
+import com.elsy.simpleinstagram.util.ActivityHelper;
+import com.elsy.simpleinstagram.util.AppConstants;
 
 import java.io.File;
 
@@ -17,14 +17,14 @@ public class NewPostPresenter implements NewPostContract.UserActionsListener, Re
 
     private final Activity activity;
     private final NewPostContract.NewPostView view;
-    private final PostsRepository repository;
+    private final PostRepository repository;
     private String filePath;
     private static final String ERROR_EMPTY = "This field is obligatory";
     private static final String ERROR_PICTURE_NOT_FOUND = "This field is obligatory";
     private static final String ID_FORMAT = "yyyyMMddHHmmss";
     private static final String PUBLISHED_AT_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
 
-    NewPostPresenter(NewPostContract.NewPostView view, PostsRepository repository) {
+    NewPostPresenter(NewPostContract.NewPostView view, PostRepository repository) {
         this.view = view;
         this.activity = ((AppCompatActivity) view);
         this.repository = repository;
